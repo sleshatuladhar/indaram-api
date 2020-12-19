@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "@sendgrid/mail": "^7.0.1",
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "boom": "^7.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http-status-codes": "^1.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.0",
+    "mssql": "^6.2.0",
+    "node-html-parser": "^1.2.20",
+    "nodemailer": "^6.4.6",
+    "sequelize": "^5.21.5"
+  },
+  "scripts": {
+    "serve:dev": "cross-env NODE_ENV=development nodemon server.js",
+    "serve:prod": "cross-env NODE_ENV=production forever start server.js",
+    "": "cross-env NODE_ENV=development nodemon server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

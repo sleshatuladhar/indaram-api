@@ -1,0 +1,14 @@
+# Dependencies #
+node_modules
+
+# Log files #
+*.log
+
+#others
+.vscode
+
+#package lock json
+package-lock.json
+
+#environment file with secure information
+.env
