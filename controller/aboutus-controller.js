@@ -58,4 +58,15 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+router.post("/change-visible", (req, res) => {
+  aboutusService
+    .updateVisible(req)
+    .then(async data => {
+      httpResponse.successHandler(res, data);
+    })
+    .catch(error => {
+      httpResponse.errorHandler(res, error);
+    });
+});
+
 module.exports = router;

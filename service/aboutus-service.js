@@ -74,6 +74,21 @@ const aboutusService = (() => {
     })
   }
 
+  const updateVisible = (req) => {
+    return new Promise(async (resolve, reject) => {
+      let body = req.body;
+      return Promise.all([
+        aboutusAboutus.update(body, { where: { id: body.id } }),
+        aboutusAboutus.update({ visible: false }, { where: { id: { [Op.ne]: body.id } } })
+      ]).then(response => {
+        resolve(response);
+      }).catch(error => {
+        console.log(error);
+        return reject(error);
+      })
+    })
+  }
+
   //#endregion
 
   //#region Returns
@@ -82,7 +97,8 @@ const aboutusService = (() => {
     fetchAboutUsByPk,
     createAboutUs,
     editAboutUs,
-    deleteAboutUs
+    deleteAboutUs,
+    updateVisible
   }
   //#endregion
 })();

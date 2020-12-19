@@ -22,7 +22,8 @@ const aboutusAboutus = conn.define('aboutus_aboutus', {
   },
   visible: {
     type: Sequelize.BOOLEAN,
-    field: 'visible'
+    field: 'visible',
+    defaultValue: false
   },
   createdAt: {
     type: Sequelize.DATE,
