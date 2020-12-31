@@ -89,6 +89,18 @@ const aboutusService = (() => {
     })
   }
 
+  const fetchAboutUsForPublic = (req) => {
+    return new Promise(async (resolve, reject) => {
+      aboutusAboutus.findOne({ where: { visible: true } })
+        .then(response => {
+          resolve(response);
+        }).catch(error => {
+          console.log(error);
+          return reject(error);
+        })
+    })
+  }
+
   //#endregion
 
   //#region Returns
@@ -98,7 +110,8 @@ const aboutusService = (() => {
     createAboutUs,
     editAboutUs,
     deleteAboutUs,
-    updateVisible
+    updateVisible,
+    fetchAboutUsForPublic
   }
   //#endregion
 })();

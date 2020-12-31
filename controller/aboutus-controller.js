@@ -14,6 +14,17 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/public", (req, res) => {
+  aboutusService
+    .fetchAboutUsForPublic(req)
+    .then(async data => {
+      httpResponse.successHandler(res, data);
+    })
+    .catch(error => {
+      httpResponse.errorHandler(res, error);
+    });
+});
+
 router.get("/:pk", (req, res) => {
   aboutusService
     .fetchAboutUsByPk(req)
