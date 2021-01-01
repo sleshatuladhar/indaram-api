@@ -78,7 +78,7 @@ const aboutusService = (() => {
       let body = req.body;
       return Promise.all([
         services.update(body, { where: { id: body.id } }),
-        services.update({ visible: false }, { where: { id: { [Op.ne]: body.id } } })
+        // services.update({ visible: false }, { where: { id: { [Op.ne]: body.id } } })
       ]).then(response => {
         resolve(response);
       }).catch(error => {
@@ -90,7 +90,7 @@ const aboutusService = (() => {
 
   const fetchServicesForPublic = (req) => {
     return new Promise(async (resolve, reject) => {
-      services.findOne({ where: { visible: true } })
+      services.findAll({ where: { visible: true } })
         .then(response => {
           resolve(response);
         }).catch(error => {
