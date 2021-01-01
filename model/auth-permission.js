@@ -20,8 +20,12 @@ const authPermission = conn.define('auth_permission', {
     type: Sequelize.STRING,
     field: 'name'
   },
+  type: {
+    type: Sequelize.STRING,
+    field: 'type'
+  }
 }, {
-  timestamps: false,
+  // timestamps: true,
   underscored: true,
 });
 

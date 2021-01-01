@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const conn = require('../common/mssql-connection');
 
-const accountsAccountUserPermissions = conn.define('accounts_account_user_permissions', {
+const accountsAccountGroups = conn.define('accounts_account_groups', {
   id: {
     type: Sequelize.INTEGER,
     field: "id",
@@ -10,12 +10,12 @@ const accountsAccountUserPermissions = conn.define('accounts_account_user_permis
   },
   accountId: {
     type: Sequelize.INTEGER,
-    field: "account_id"
+    field: 'account_id'
   },
-  permissionId: {
+  groupId: {
     type: Sequelize.INTEGER,
-    field: "permission_id"
-  },
+    field: 'group_id'
+  }
 }, {
   // timestamps: true,
   underscored: true,
@@ -23,4 +23,4 @@ const accountsAccountUserPermissions = conn.define('accounts_account_user_permis
   // updatedAt: 'updated_at'
 });
 
-module.exports = accountsAccountUserPermissions;
+module.exports = accountsAccountGroups;

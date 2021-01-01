@@ -17,7 +17,7 @@ const djangoContentType = conn.define('django_content_type', {
     field: 'model'
   },
 }, {
-  timestamps: false,
+  // timestamps: true,
   underscored: true,
 });
 

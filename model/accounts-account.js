@@ -21,41 +21,18 @@ const accountsAccount = conn.define('accounts_account', {
     type: Sequelize.STRING,
     field: 'username'
   },
-  firstName: {
-    type: Sequelize.STRING,
-    field: 'first_name'
-  },
-  lastName: {
-    type: Sequelize.STRING,
-    field: 'last_name'
-  },
   email: {
     type: Sequelize.STRING,
     field: 'email'
   },
   isActive: {
     type: Sequelize.BOOLEAN,
-    field: 'is_active'
+    field: 'is_active',
+    defaultValue: true
   },
   dateJoined: {
     type: Sequelize.DATE,
     field: 'date_joined'
-  },
-  fullName: {
-    type: Sequelize.STRING,
-    field: 'full_name'
-  },
-  isStaff: {
-    type: Sequelize.BOOLEAN,
-    field: 'is_staff'
-  },
-  permissions: {
-    type: Sequelize.STRING,
-    field: 'permissions'
-  },
-  isSuperuser: {
-    type: Sequelize.BOOLEAN,
-    field: 'is_superuser'
   },
   createdAt: {
     type: Sequelize.DATE,

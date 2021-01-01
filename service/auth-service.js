@@ -9,79 +9,30 @@ const authService = (() => {
 
   //#region Models
   const accountsAccount = require('../model/accounts-account');
-  const authPermission = require('../model/auth-permission');
-  const accountsAccountUserPermissions = require('../model/accounts-account-user-permissions');
   //#endregion
 
   //#region Services
   const utilityService = require('../util/utility-service');
+  const userService = require('./user-service');
   //#endregion
 
   //#region Functions
   const register = (req) => {
     return new Promise(async (resolve, reject) => {
       let t = await conn.transaction();
-      let body = req.body;
       try {
-        //#region Checking if email exists
-        let isEmailExist = await accountsAccount
-          .findOne({ where: { email: body.email } });
-        if (isEmailExist) {
-          await t.rollback();
-          return reject({
-            message: `User with ${body.email} already exists`
-          });
-        }
-        //#endregion
-
-        //#region Saving new account
-        let account_saved = await accountsAccount
-          .create(body, { transaction: t })
-          .then(response => {
-            return response;
-          }).catch(error => {
-            console.log('error', error);
+        //#region Creating new user
+        let accountSaved = await userService
+          .createUser(req)
+          .catch(error => {
             t.rollback();
             return reject(error);
           });
         //#endregion
 
-        //#region Assign auth permissions to account
-        await assignPermissions(account_saved, t);
-        //#endregion
-
         await t.commit();
-        resolve(account_saved);
+        resolve(accountSaved);
       } catch (error) {
-        console.log(error);
-        await t.rollback();
-        return reject(error);
-      }
-    })
-  }
-
-  const assignPermissions = (account = {}, transaction = null) => {
-    return new Promise(async (resolve, reject) => {
-      let t = transaction ? transaction : await conn.transaction();
-      let resolveData;
-      try {
-        let accountPermissions = [];
-        if (account && account.isSuperuser) {
-          let authPermissionList = await authPermission
-            .findAll();
-          accountPermissions = authPermissionList.map(x => {
-            return {
-              permissionId: x.id,
-              accountId: account.id
-            }
-          })
-          resolveData = await accountsAccountUserPermissions
-            .bulkCreate(accountPermissions, { transaction: t });
-        }
-        !transaction && t.commit();
-        resolve(resolveData);
-      } catch (error) {
-        console.log(error);
         await t.rollback();
         return reject(error);
       }
@@ -145,7 +96,6 @@ const authService = (() => {
     })
   }
 
-  // assignPermissions({ isSuperuser: true });
   //#endregion
 
   //#region Returns
