@@ -11,6 +11,7 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.0",
     "mssql": "^6.2.0",
+    "mysql2": "^2.2.5",
     "node-html-parser": "^1.2.20",
     "nodemailer": "^6.4.6",
     "sequelize": "^5.21.5"

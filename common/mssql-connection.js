@@ -16,13 +16,8 @@ Sequelize.DATE.prototype._stringify = function _stringify(date, options) {
 
 const SEQUELIZE_CONF = new Sequelize(MSSQL_DATABASE, MSSQL_USER, MSSQL_PASSWORD, {
   host: MSSQL_HOST,
-  dialect: 'mssql',
-  dialectOptions: {
-    options:
-    {
-      useUTC: true
-    }
-  },
+  // dialect: 'mssql',
+  dialect: 'mysql',
   define: {
     freezeTableName: true,
     timestamps: false
