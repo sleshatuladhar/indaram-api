@@ -13,8 +13,10 @@ app.use(cors({
   origin: '*',
   credentials: true
 }));
+// app.options('*', cors());
 
 app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
   // utilityService.setRequestHeader();
   utilityService.verifyDomain(req, res, next);
 });
