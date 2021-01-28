@@ -12,6 +12,7 @@ let port = PORT || config.node_port;
 app.use(cors());
 
 app.use((req, res, next) => {
+  utilityService.setRequestHeader();
   utilityService.verifyDomain(req, res, next);
 });
 

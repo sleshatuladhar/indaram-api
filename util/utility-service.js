@@ -2,6 +2,7 @@ const utilityService = (() => {
   const jwt = require('jsonwebtoken');
   const commonConstant = require('../constant/common-constant');
   const httpResponse = require('../common/http-response');
+  const axios = require('axios');
 
   const decodeToken = (req) => {
     return new Promise((resolve, reject) => {
@@ -30,9 +31,20 @@ const utilityService = (() => {
       httpResponse.unAuthorized(res, error);
   }
 
+  const setRequestHeader = () => {
+    axios.interceptors.request.use(
+      config => {
+        config.headers.requestapp = commonConstant.REQUEST_APP;
+        return config;
+      },
+      error => Promise.reject(error)
+    );
+  };
+
   return {
     decodeToken,
-    verifyDomain
+    verifyDomain,
+    setRequestHeader
   }
 })();
 
