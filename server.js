@@ -9,7 +9,10 @@ const utilityService = require('./util/utility-service');
 const app = express();
 let port = PORT || config.node_port;
 
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  credentials: true
+}));
 
 app.use((req, res, next) => {
   utilityService.setRequestHeader();
