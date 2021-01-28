@@ -1,7 +1,7 @@
 const route = require('./routes.js');
 
 const express = require('express');
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const { PORT, NODE_ENV } = require('./config');
 const utilityService = require('./util/utility-service');
@@ -20,13 +20,13 @@ app.use((req, res, next) => {
 });
 
 app.use(
-  express.json({
+  bodyParser.json({
     limit: "50mb"
   })
 );
 
 app.use(
-  express.urlencoded({
+  bodyParser.urlencoded({
     limit: "50mb",
     parameterLimit: 500000,
     extended: true
