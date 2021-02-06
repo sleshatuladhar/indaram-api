@@ -7,19 +7,23 @@ const { PORT, NODE_ENV } = require('./config');
 const utilityService = require('./util/utility-service');
 
 const app = express();
-let port = PORT || config.node_port;
+let port = PORT || process.env.PORT || config.node_port;
 
-app.use(cors({
-  origin: '*',
-  credentials: true
-}));
+// const SEQUELIZE_CONF=require('./common/mssql-connection');
+// SEQUELIZE_CONF.sync();
+
+// app.use(cors({
+//   origin: '*',
+//   credentials: true
+// }));
+app.use(cors());
 // app.options('*', cors());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  // utilityService.setRequestHeader();
-  utilityService.verifyDomain(req, res, next);
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   // utilityService.setRequestHeader();
+//   utilityService.verifyDomain(req, res, next);
+// });
 
 app.use(
   bodyParser.json({
@@ -35,9 +39,15 @@ app.use(
   })
 );
 
+app.get('/', (req, res) => {
+  res.send("Hello World");
+});
+
 app.use('/api', route);
 
 if (NODE_ENV != "production") {
   console.log("PORT NUMBER:", port);
 }
-app.listen(port);
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});

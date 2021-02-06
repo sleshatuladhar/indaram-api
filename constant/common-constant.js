@@ -4,7 +4,8 @@ const commonConstant = {
   ALLOWED_DOMAINS: [
     'https://demo.indaramhealth.com',
     'https://indaramhealth.com',
-    'localhost'
+    'localhost',
+    'http://192.168.18.11/'
   ]
 };
 
